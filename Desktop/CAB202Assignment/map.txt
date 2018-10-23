@@ -1,0 +1,14 @@
+=       =   = =       = 
+  =   = x     x x   =   
+            = = = = =   
+  x = = x = =   x     = 
+Screen Height: 33
+Screen Width: 90
+Columns: 12
+Rows: 4
+Max Platforms: 24
+Forbidden: 6
+Safe: 18
+Holes: 24
+Length Of All: 24
+Length Of Forbidden Platforms: 6

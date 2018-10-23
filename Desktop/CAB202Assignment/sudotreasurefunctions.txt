@@ -1,0 +1,211 @@
+int food = 5;
+char f[15];
+
+void setup_food(void)
+{
+	draw_string("Food:", 30.3);
+	sprintf(f, "%d", food);
+	draw_string(f, 35,3);
+}
+
+void remove_food()
+{
+	food -= 1;
+	draw_string(f, 35,3);
+}
+
+void add_food()
+{
+	food += 1;
+	draw_string(f, 35,3);
+}
+
+//Create player
+void start_player() {
+
+//safe platform
+byte bitmap_safePlatform[] = {
+            BYTE( 11111111 ),
+            BYTE( 11111111 )
+};
+//forbidden platform
+byte bitmap_forbiddenPlatform[] = {
+            BYTE( 10101010 ),
+            BYTE( 01010101 )
+};
+
+//Player sprite
+int player_id;
+
+Sprite player;
+Sprite * player_sprite = &player;
+
+byte bitmap_player[] = {
+            BYTE( 00111000 ),
+            BYTE( 00101000 ),
+            BYTE( 00111000 ),
+            BYTE( 11111110 ),
+            BYTE( 00010000 ),
+            BYTE( 00101000 ),
+            BYTE( 01000100 )
+    };
+
+    const int hero_width = 4;
+    const int hero_height = 3;
+
+//    Sprite player;
+
+    init_sprite( &player, 38,28,hero_width,hero_height, bitmap_player );
+    player.is_visible = 1;
+    player_sprite->is_visible = 1;
+
+    player.x = 1;
+    player.y = 0;
+
+    draw_sprite( &player );
+
+
+}
+void start_player() {
+
+
+
+    const int hero_width = 4;
+    const int hero_height = 3;
+
+//    Sprite player;
+
+    init_sprite( &player, 38,28,hero_width,hero_height, bitmap_player );
+    player.is_visible = 1;
+    player_sprite->is_visible = 1;
+
+    player.x = 1;
+    player.y = 0;
+
+    draw_sprite( &player );
+
+
+}
+void game_countdown() {
+
+//End game
+    clear();
+    int timer = 3;
+
+    while ( timer > 0) {
+
+        draw_string( "3", 40, 22 );
+        turn_on(LED0);
+        turn_on(LED1);
+        turn_on(LED2);
+        refresh();
+        _delay_ms(1000);
+        turn_off(LED0);
+        turn_off(LED1);
+        turn_off(LED2);
+        clear();
+        draw_string( "2", 40, 22 );
+        turn_on(LED0);
+        turn_on(LED1);
+        refresh();
+        _delay_ms(1000);
+        turn_off(LED0);
+        turn_off(LED1);
+        clear();
+        draw_string( "1", 40, 22 );
+        turn_on(LED1);
+        refresh();
+        _delay_ms(1000);
+        turn_off(LED0);
+        turn_off(LED1);
+        clear();
+        timer = 0;
+    }
+    clear();
+
+}
+
+void start_screen() {
+
+    clear();
+    draw_string("Treasure Hunt",15,0);
+    draw_string("Teensy Edition",7,9);
+    draw_string("n10026151",19,27);
+    draw_string("Shae Schlusser",15,36);
+    refresh();
+    //add in platform generation
+    wait_until( pressed( SW2 ) );
+    wait_until( !pressed( SW2 ) );
+
+    game_countdown();
+    refresh();
+}
+
+
+
+void player_fall_out_of_world(void)
+{
+	if (y direction > bottom of screen)
+	{
+		    sprite_init(player_id, respawnX, respawnY, 3, 3, player_sprite);
+		    update_lives();
+	}
+}
+
+void spawn_zombies(void)
+{
+	blink LED1 && LED2
+	delay(1000);
+	blink LED1 && LED2
+	delay(1000);
+	blink LED1 && LED2
+	delay(1000);
+
+	if((maxZombies = false)&&(numZombies = 0))
+	{
+		draw_sprite(zombie_id1 at y coordinate top of screen, (random (x) that isnt on the spawn or on other zombies), 3,3, zombie_sprite)
+		draw_sprite(zombie_id2 at y coordinate top of screen, (random (x) that isnt on the spawn or on other zombies), 3,3, zombie_sprite)
+		draw_sprite(zombie_id3 at y coordinate top of screen, (random (x) that isnt on the spawn or on other zombies), 3,3, zombie_sprite)
+		draw_sprite(zombie_id4 at y coordinate top of screen, (random (x) that isnt on the spawn or on other zombies), 3,3, zombie_sprite)
+		draw_sprite(zombie_id5 at y coordinate top of screen, (random (x) that isnt on the spawn or on other zombies), 3,3, zombie_sprite)
+		numZombies = 5;
+		MaxZombies = true;
+	}
+}
+
+void check_offscreen(void)
+{
+	if (player y coord < bottom of screen)
+	{
+		sprite_init(player_id, respawnX, respawnY, 3, 3, player_sprite);
+		update_lives();
+	}
+
+	if (zombie1 y coord < bottom of screen)
+	{
+		remove_sprite(zombie_id1)
+		numZombies -= 1;
+	}
+		if (zombie2 y coord < bottom of screen)
+	{
+		remove_sprite(zombie_id2)
+		numZombies -= 1;
+	}
+		if (zombie3 y coord < bottom of screen)
+	{
+		remove_sprite(zombie_id3)
+		numZombies -= 1;
+	}
+		if (zombie4 y coord < bottom of screen)
+	{
+		remove_sprite(zombie_id4)
+		numZombies -= 1;
+	}
+		if (zombie5 y coord < bottom of screen)
+	{
+		remove_sprite(zombie_id5)
+		numZombies -= 1;
+	}
+}
+
+
